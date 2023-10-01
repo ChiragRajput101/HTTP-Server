@@ -26,14 +26,14 @@ int main() {
 
     // Reading a multi-line html file
     
-    // char buffer[128];
-    // char response_data[2048] = {'\0'}; //Initialize to '\0' so there's no garbage values since we will append to the end of this string
-    // while(fgets(buffer, sizeof(buffer), html)){
-    //     strcat(response_data, buffer);
-    // }
+    char buffer[128];
+    char response_data[2048] = {'\0'}; //Initialize to '\0' so there's no garbage values since we will append to the end of this string
+    while(fgets(buffer, sizeof(buffer), html)){
+        strcat(response_data, buffer);
+    }
 
-    char response_data[2048];
-    fgets(response_data, 2048, html);
+    // char response_data[2048];
+    // fgets(response_data, 2048, html);
 
     char http_header[2048] = HTTP_200_OK;
     strcat(http_header, response_data);
@@ -47,7 +47,7 @@ int main() {
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(6000);
+    server_addr.sin_port = htons(6969);
 
     int Bind = bind(socketFD, (struct sockaddr *) &server_addr, sizeof(server_addr));
     if(Bind == -1) error("Cant bind to the port\n");
