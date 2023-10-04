@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <netdb.h>
 
-#define PORT_NO 6000
+#define PORT_NO 6969
 #define BACKLOG 1
 #define HTTP_200_OK "HTTP/1.1 200 OK \r\n\r\n"
 
@@ -22,7 +22,6 @@ int main() {
     // the server sends the HTML to the client, in this case we will be only sending a dummy index.html file that only says "we are conn via http"
     FILE *html;
     html = fopen("index.html","r");
-
 
     // Reading a multi-line html file
     
@@ -47,7 +46,7 @@ int main() {
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(6969);
+    server_addr.sin_port = htons(PORT_NO);
 
     int Bind = bind(socketFD, (struct sockaddr *) &server_addr, sizeof(server_addr));
     if(Bind == -1) error("Cant bind to the port\n");
@@ -56,7 +55,7 @@ int main() {
     struct sockaddr_in client_addr;
     socklen_t client_len;
 
-    int Listen = listen(socketFD, 1);
+    int Listen = listen(socketFD, BACKLOG);
     if(Listen == -1) error("Error while listening\n");
 
     while(1) {
